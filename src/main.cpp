@@ -1,7 +1,6 @@
 #include <Geode/ui/Notification.hpp>
 #include <matjson.hpp>
 #include <Geode/modify/MenuGameLayer.hpp>
-#include "geode_platform.hpp"
 #include <random>
 #include <numeric>
 
@@ -93,12 +92,17 @@ struct MGMHook : geode::Modify<MGMHook, MenuGameLayer>
 
 	PlayerObject* getplayer()
 	{
-		if constexpr(geode::platform::win) return m_playerObject;
-		if constexpr(geode::platform::android32) return MBO(PlayerObject*, this, 0x180);
-		if constexpr(geode::platform::android64) return MBO(PlayerObject*, this, 0x1B0);
-		return nullptr;
+		#if defined(GEODE_IS_WINDOWS)
+			return m_playerObject;
+		#elif defined(GEODE_IS_ANDROID32)
+			return MBO(PlayerObject*, this, 0x180);
+		#elif defined(GEODE_IS_ANDROID64)
+			return MBO(PlayerObject*, this, 0x1B0);
+		#else
+			#error Unsupported platform
+		#endif
 	}
-	
+
 	void resetOrder(size_t count)
 	{
 		auto& order = m_fields->order;
