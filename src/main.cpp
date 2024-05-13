@@ -98,8 +98,7 @@ struct MGMHook : geode::Modify<MGMHook, MenuGameLayer>
 		if constexpr(geode::platform::android64) return MBO(PlayerObject*, this, 0x1B0);
 		return nullptr;
 	}
-
-
+	
 	void resetOrder(size_t count)
 	{
 		auto& order = m_fields->order;
