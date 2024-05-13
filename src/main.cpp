@@ -1,11 +1,12 @@
-#include "Geode/binding/MenuGameLayer.hpp"
-#include "Geode/cocos/CCDirector.h"
-#include "Geode/ui/Notification.hpp"
-#include <Geode/Geode.hpp>
+#include <Geode/ui/Notification.hpp>
 #include <matjson.hpp>
-#include <numeric>
-#include <random>
 #include <Geode/modify/MenuGameLayer.hpp>
+#include "geode_platform.hpp"
+#include <random>
+#include <numeric>
+
+#define MEMBERBYOFFSET(type, class, offset) *reinterpret_cast<type*>(reinterpret_cast<uintptr_t>(class) + offset)
+#define MBO MEMBERBYOFFSET
 
 using namespace cocos2d;
 
@@ -90,6 +91,14 @@ struct MGMHook : geode::Modify<MGMHook, MenuGameLayer>
 		int currentIndex = 0;
 	};
 
+	PlayerObject* getplayer()
+	{
+		if constexpr(geode::platform::win) return m_playerObject;
+		if constexpr(geode::platform::android32) return MBO(PlayerObject*, this, 0x180);
+		if constexpr(geode::platform::android64) return MBO(PlayerObject*, this, 0x1B0);
+		return nullptr;
+	}
+
 
 	void resetOrder(size_t count)
 	{
@@ -123,7 +132,7 @@ struct MGMHook : geode::Modify<MGMHook, MenuGameLayer>
 
 	void resetPlayer()
 	{
-		auto* po = m_playerObject;
+		auto* po = getplayer();
 		if(po && po->getPositionX() < CCDirector::get()->getWinSize().width)
 		{
 			onPlayerClicked();
@@ -140,6 +149,7 @@ struct MGMHook : geode::Modify<MGMHook, MenuGameLayer>
 		po->toggleSwingMode(false, false);
 
 		auto player = getNextPlayer();
+
 		po->updatePlayerFrame(player.iconid);
 
 		auto gm = GameManager::sharedState();

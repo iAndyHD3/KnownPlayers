@@ -1,6 +1,9 @@
 {
 	"geode": "2.0.0-beta.26",
-	"gd": "2.204",
+	"gd": {
+		"android": "2.205",
+		"win": "2.204"
+	},
 	"version": "v1.0.0",
 	"id": "iandyhd3.known_players",
 	"name": "Known Players",
