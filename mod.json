@@ -1,14 +1,22 @@
 {
+	"$schema": "https://raw.githubusercontent.com/geode-sdk/vscode/9caea2c9ffbd95e3ca99eb0c94269092ca92d9de/assets/mod-info-validation.json",
 	"geode": "3.2.0",
 	"gd": {
-		"win": "2.206"
+		"win": "2.206",
+		"android": "2.206",
+		"mac": "2.206"
 	},
 	"version": "v1.0.0",
 	"id": "iandyhd3.known_players",
 	"name": "Known Players",
 	"developer": "iAndyHD3",
+	"tags": [ "enhancement", "offline" ],
+	"repository": "https://github.com/iAndyHD3/KnownPlayers",
 	"description": "only known/famous players pop up in the main menu",
 	"resources": {
 		"files": ["assets/*.json"]
+	},
+	"links": {
+		"community": "https://discord.gg/mmVmCtsG5K"
 	}
 }

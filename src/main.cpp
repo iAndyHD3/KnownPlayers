@@ -1,6 +1,7 @@
 #include "Geode/binding/MenuGameLayer.hpp"
 #include "Geode/binding/PlayerObject.hpp"
 #include "Geode/loader/Mod.hpp"
+#include "Geode/modify/Modify.hpp"
 #include <Geode/ui/Notification.hpp>
 #include <Geode/loader/Dirs.hpp>
 #include <Geode/modify/MenuGameLayer.hpp>
@@ -141,18 +142,24 @@ struct MGMHook : geode::Modify<MGMHook, MenuGameLayer>
 		geode::Notification::create(name, geode::NotificationIcon::Success, time)->show();
 	}
 
-	void resetPlayer()
+	$override
+	void destroyPlayer()
 	{
-		auto* po = m_playerObject;
-		if(!po) return MenuGameLayer::resetPlayer();
-
-		if(auto current = PlayerChooser::get()->current();
-			current && po->getPositionX() < CCDirector::get()->getWinSize().width)
+		auto current = PlayerChooser::get()->current();
+		if(current && m_playerObject->getPositionX() < CCDirector::get()->getWinSize().width)
 		{
 			onPlayerClicked(current->name);
 		}
+		MenuGameLayer::destroyPlayer();
+	}
 
+	$override
+	void resetPlayer()
+	{
 		MenuGameLayer::resetPlayer();
+
+		auto* po = m_playerObject;
+		if(!po) return;
 
 		auto player = PlayerChooser::get()->next();
 		if(!player)
