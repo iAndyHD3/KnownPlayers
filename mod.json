@@ -1,12 +1,14 @@
 {
-	"geode": "2.0.0-beta.26",
+	"geode": "3.2.0",
 	"gd": {
-		"android": "2.205",
-		"win": "2.204"
+		"win": "2.206"
 	},
 	"version": "v1.0.0",
 	"id": "iandyhd3.known_players",
 	"name": "Known Players",
 	"developer": "iAndyHD3",
-	"description": "only known/famous players pop up in the main menu"
+	"description": "only known/famous players pop up in the main menu",
+	"resources": {
+		"files": ["assets/*.json"]
+	}
 }

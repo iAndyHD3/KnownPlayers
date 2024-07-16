@@ -19,4 +19,10 @@ endif()
 
 add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
 
+
 setup_geode_mod(${PROJECT_NAME})
+
+CPMAddPackage("gh:stephenberry/glaze#81d8236")
+
+
+target_link_libraries(${PROJECT_NAME} glaze::glaze)
