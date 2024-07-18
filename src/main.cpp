@@ -179,6 +179,11 @@ public:
         std::iota(order.begin(), order.end(), 0);
         std::shuffle(order.begin(), order.end(), std::mt19937{std::random_device{}()});
     }
+
+    const std::vector<JsonPlayer>& getPlayers()
+    {
+        return jsonDoc.players;
+    }
 private:
     JsonDocument jsonDoc;
     std::vector<int> order;
@@ -304,11 +309,14 @@ struct MGMHook : geode::Modify<MGMHook, MenuGameLayer>
 
 
 
-
-#define SCHEMA_COPY
+//This is not relevant (disabled in the release)
+//just generating useful stuff from the json and writing to clipboard
+//#define SCHEMA_COPY
 #ifdef SCHEMA_COPY
 
 #include <Geode/modify/MenuLayer.hpp>
+#include <set>
+#include <fmt/format.h>
 
 struct MenuLayerHook : geode::Modify<MenuLayerHook, MenuLayer>
 {
@@ -318,6 +326,21 @@ struct MenuLayerHook : geode::Modify<MenuLayerHook, MenuLayer>
         geode::utils::clipboard::write([&](){
             return schema ? *schema : std::string("Error generating schema") + glz::format_error(schema.error());
         }());
+
+
+        std::set<std::string_view> alphabeticalSortedPlayerNames;
+        for(const auto& p : PlayerChooser::get()->getPlayers())
+        {
+            alphabeticalSortedPlayerNames.insert(p.name);
+        }
+
+        std::string writestr = fmt::format("There are {} players added in this version:\n", alphabeticalSortedPlayerNames.size());
+
+        for(const auto& name : alphabeticalSortedPlayerNames)
+        {
+            writestr += fmt::format("- {}\n", name);
+        }
+        geode::utils::clipboard::write(writestr);
     }
 };
 
