@@ -1,310 +1,357 @@
-[
-  {
-    "name": "AeonAir",
-    "iconid": 109,
-    "color1": 29,
-    "color2": 3,
-    "glow": false
-  },
-  {
-    "name": "Colon",
-    "iconid": 60,
-    "color1": 18,
-    "color2": 10,
-    "glow": true
-  },
-  {
-    "name": "Cool",
-    "iconid": 37,
-    "color1": 20,
-    "color2": 17,
-    "glow": true
-  },
-  {
-    "name": "Cyclic",
-    "iconid": 30,
-    "color1": 3,
-    "color2": 12,
-    "glow": false
-  },
-  {
-    "name": "DanZmeN",
-    "iconid": 104,
-    "color1": 34,
-    "color2": 12,
-    "glow": true
-  },
-  {
-    "name": "envylol",
-    "iconid": 73,
-    "color1": 20,
-    "color2": 1,
-    "glow": true
-  },
-  {
-    "name": "EVW",
-    "iconid": 28,
-    "color1": 12,
-    "color2": 9,
-    "glow": false
-  },
-  {
-    "name": "Flub",
-    "iconid": 25,
-    "color1": 3,
-    "color2": 12,
-    "glow": true
-  },
-  {
-    "name": "Flaaroni",
-    "iconid": 62,
-    "color1": 12,
-    "color2": 15,
-    "glow": false
-  },
-  {
-    "name": "Jayuff",
-    "iconid": 22,
-    "color1": 19,
-    "color2": 11,
-    "glow": true
-  },
-  {
-    "name": "Jeyzor",
-    "iconid": 99,
-    "color1": 24,
-    "color2": 25,
-    "glow": true
-  },
-  {
-    "name": "Juniper",
-    "iconid": 98,
-    "color1": 40,
-    "color2": 12,
-    "glow": true
-  },
-  {
-    "name": "Knobbelboy",
-    "iconid": 37,
-    "color1": 10,
-    "color2": 14,
-    "glow": false
-  },
-  {
-    "name": "Knots",
-    "iconid": 50,
-    "color1": 40,
-    "color2": 3,
-    "glow": true
-  },
-  {
-    "name": "KrmaL",
-    "iconid": 30,
-    "color1": 9,
-    "color2": 12,
-    "glow": true
-  },
-  {
-    "name": "lemoncak3",
-    "iconid": 107,
-    "color1": 11,
-    "color2": 12,
-    "glow": false
-  },
-  {
-    "name": "Lemons",
-    "iconid": 93,
-    "color1": 7,
-    "color2": 11,
-    "glow": true
-  },
-  {
-    "name": "Nexus",
-    "iconid": 35,
-    "color1": 9,
-    "color2": 12,
-    "glow": true
-  },
-  {
-    "name": "Michigun",
-    "iconid": 22,
-    "color1": 15,
-    "color2": 12,
-    "glow": true
-  },
-  {
-    "name": "MiKhaXx",
-    "iconid": 11,
-    "color1": 1,
-    "color2": 15,
-    "glow": false
-  },
-  {
-    "name": "mulpan",
-    "iconid": 90,
-    "color1": 2,
-    "color2": 12,
-    "glow": true
-  },
-  {
-    "name": "npesta",
-    "iconid": 30,
-    "color1": 2,
-    "color2": 12,
-    "glow": false
-  },
-  {
-    "name": "Norcda Childa",
-    "iconid": 53,
-    "color1": 37,
-    "color2": 12,
-    "glow": true
-  },
-  {
-    "name": "OmegaFalcon",
-    "iconid": 11,
-    "color1": 22,
-    "color2": 4,
-    "glow": true
-  },
-  {
-    "name": "Partition",
-    "iconid": 3,
-    "color1": 4,
-    "color2": 3,
-    "glow": false
-  },
-  {
-    "name": "RedHuseey",
-    "iconid": 98,
-    "color1": 9,
-    "color2": 12,
-    "glow": false
-  },
-  {
-    "name": "Riot",
-    "iconid": 35,
-    "color1": 7,
-    "color2": 3,
-    "glow": true
-  },
-  {
-    "name": "Smiffy777",
-    "iconid": 115,
-    "color1": 29,
-    "color2": 14,
-    "glow": true
-  },
-  {
-    "name": "SpKale",
-    "iconid": 51,
-    "color1": 41,
-    "color2": 12,
-    "glow": true
-  },
-  {
-    "name": "SrGuillester",
-    "iconid": 23,
-    "color1": 12,
-    "color2": 15,
-    "glow": true
-  },
-  {
-    "name": "Technical",
-    "iconid": 48,
-    "color1": 0,
-    "color2": 13,
-    "glow": false
-  },
-  {
-    "name": "TheRealSdSlAyEr",
-    "iconid": 74,
-    "color1": 3,
-    "color2": 12,
-    "glow": true
-  },
-  {
-    "name": "TriAxis",
-    "iconid": 51,
-    "color1": 18,
-    "color2": 12,
-    "glow": true
-  },
-  {
-    "name": "TrusTa",
-    "iconid": 30,
-    "color1": 7,
-    "color2": 3,
-    "glow": true
-  },
-  {
-    "name": "ViPriN",
-    "iconid": 133,
-    "color1": 11,
-    "color2": 13,
-    "glow": true
-  },
-  {
-    "name": "Wulzy",
-    "iconid": 44,
-    "color1": 29,
-    "color2": 11,
-    "glow": false
-  },
-  {
-    "name": "XShadowWizardX",
-    "iconid": 115,
-    "color1": 12,
-    "color2": 7,
-    "glow": true
-  },
-  {
-    "name": "FunnyGame",
-    "iconid": 13,
-    "color1": 18,
-    "color2": 9,
-    "glow": false
-  },
-  {
-    "name": "Zobros",
-    "iconid": 36,
-    "color1": 12,
-    "color2": 15,
-    "glow": true
-  },
-  {
-    "name": "ZenthicAlpha",
-    "iconid": 41,
-    "color1": 12,
-    "color2": 3,
-    "glow": true
-  },
-  {
-    "name": "Alkali",
-    "iconid": 4,
-    "color1": 18,
-    "color2": 8,
-    "glow": true
-  },
-  {
-    "name": "Danolex",
-    "iconid": 46,
-    "color1": 3,
-    "color2": 11,
-    "glow": true
-  },
-  {
-    "name": "Cirtrax",
-    "iconid": 93,
-    "color1": 18,
-    "color2": 41,
-    "glow": false
-  },
-  {
-    "name": "CastriX",
-    "iconid": 120,
-    "color1": 6,
-    "color2": 12,
-    "glow": true
-  }
-]
+{
+  "$schema": "./schema.json",
+  "players": [
+    {
+      "name": "AeonAir",
+      "iconid": 109,
+      "color1": 29,
+      "color2": 3,
+      "ship": 38,
+      "glow": false
+    },
+    {
+      "name": "Colon",
+      "iconid": 60,
+      "ship": 10,
+      "color1": 18,
+      "color2": 10,
+      "glow": true
+    },
+    {
+      "name": "Cool",
+      "iconid": 37,
+      "color1": 20,
+      "color2": 17,
+      "glow": true
+    },
+    {
+      "name": "Cyclic",
+      "iconid": 30,
+      "color1": 3,
+      "color2": 12,
+      "glow": false
+    },
+    {
+      "name": "DanZmeN",
+      "iconid": 104,
+      "color1": 34,
+      "color2": 12,
+      "glow": true
+    },
+    {
+      "name": "envylol",
+      "iconid": 73,
+      "color1": 20,
+      "color2": 1,
+      "glow": true
+    },
+    {
+      "name": "EVW",
+      "iconid": 28,
+      "ship": 12,
+      "color1": 12,
+      "color2": 9,
+      "glow": false
+    },
+    {
+      "name": "Flub",
+      "iconid": 25,
+      "color1": 3,
+      "color2": 12,
+      "glow": true
+    },
+    {
+      "name": "Flaaroni",
+      "iconid": 62,
+      "color1": 12,
+      "color2": 15,
+      "glow": false
+    },
+    {
+      "name": "Jayuff",
+      "iconid": 22,
+      "color1": 19,
+      "color2": 11,
+      "glow": true
+    },
+    {
+      "name": "Jeyzor",
+      "iconid": 99,
+      "color1": 24,
+      "color2": 25,
+      "glow": true
+    },
+    {
+      "name": "Juniper",
+      "iconid": 98,
+      "ship": 35,
+      "color1": 40,
+      "color2": 12,
+      "glow": true
+    },
+    {
+      "name": "Knobbelboy",
+      "iconid": 37,
+      "color1": 10,
+      "color2": 14,
+      "glow": false
+    },
+    {
+      "name": "Knots",
+      "iconid": 50,
+      "color1": 40,
+      "color2": 3,
+      "glow": true
+    },
+    {
+      "name": "KrmaL",
+      "ship": 12,
+      "ball": 11,
+      "ufo": 4,
+      "wave": 4,
+      "robot": 2,
+      "spider": 4,
+      "iconid": 30,
+      "color1": 9,
+      "color2": 12,
+      "glow": true
+    },
+    {
+      "name": "lemoncak3",
+      "iconid": 107,
+      "color1": 11,
+      "color2": 12,
+      "glow": false
+    },
+    {
+      "name": "Lemons",
+      "iconid": 93,
+      "color1": 7,
+      "color2": 11,
+      "glow": true
+    },
+    {
+      "name": "Nexus",
+      "iconid": 35,
+      "ship": 33,
+      "ball": 30,
+      "ufo": 18,
+      "wave": 11,
+      "robot": 23,
+      "spider": 13,
+      "color1": 9,
+      "color2": 12,
+      "glow": true
+    },
+    {
+      "name": "Michigun",
+      "ship": 16,
+      "ball": 9,
+      "ufo": 28,
+      "wave": 12,
+      "robot": 8,
+      "spider": 3,
+      "iconid": 22,
+      "color1": 15,
+      "color2": 12,
+      "glow": true
+    },
+    {
+      "name": "MiKhaXx",
+      "iconid": 11,
+      "ship": 23,
+      "color1": 1,
+      "color2": 15,
+      "glow": false
+    },
+    {
+      "name": "mulpan",
+      "iconid": 90,
+      "ship": 30,
+      "ufo": 28,
+      "color1": 2,
+      "color2": 12,
+      "glow": true
+    },
+    {
+      "name": "npesta",
+      "iconid": 30,
+      "ship": 22,
+      "color1": 2,
+      "color2": 12,
+      "glow": false
+    },
+    {
+      "name": "Norcda Childa",
+      "iconid": 53,
+      "color1": 37,
+      "color2": 12,
+      "glow": true
+    },
+    {
+      "name": "OmegaFalcon",
+      "iconid": 11,
+      "color1": 22,
+      "color2": 4,
+      "glow": true
+    },
+    {
+      "name": "Partition",
+      "iconid": 3,
+      "ship": 17,
+      "ball": 42,
+      "ufo": 25,
+      "color1": 4,
+      "color2": 3,
+      "glow": false
+    },
+    {
+      "name": "RedHuseey",
+      "iconid": 98,
+      "color1": 9,
+      "color2": 12,
+      "glow": false
+    },
+    {
+      "name": "Riot",
+      "iconid": 35,
+      "color1": 7,
+      "color2": 3,
+      "glow": true
+    },
+    {
+      "name": "Smiffy777",
+      "iconid": 115,
+      "ship": 28,
+      "color1": 29,
+      "color2": 14,
+      "glow": true
+    },
+    {
+      "name": "SpKale",
+      "iconid": 51,
+      "color1": 41,
+      "color2": 12,
+      "glow": true
+    },
+    {
+      "name": "SrGuillester",
+      "iconid": 23,
+      "ship": 5,
+      "ball": 6,
+      "ufo": 4,
+      "color1": 12,
+      "color2": 15,
+      "glow": true
+    },
+    {
+      "name": "Technical",
+      "iconid": 48,
+      "ship": 17,
+      "color1": 0,
+      "color2": 13,
+      "glow": false
+    },
+    {
+      "name": "TheRealSdSlAyEr",
+      "iconid": 74,
+      "color1": 3,
+      "color2": 12,
+      "glow": true
+    },
+    {
+      "name": "TriAxis",
+      "iconid": 51,
+      "ship": 22,
+      "color1": 18,
+      "color2": 12,
+      "glow": true
+    },
+    {
+      "name": "TrusTa",
+      "ship": 17,
+      "iconid": 30,
+      "color1": 7,
+      "color2": 3,
+      "glow": true
+    },
+    {
+      "name": "ViPriN",
+      "iconid": 133,
+      "ship": 42,
+      "ball": 32,
+      "ufo": 29,
+      "wave": 30,
+      "robot": 16,
+      "color1": 11,
+      "color2": 13,
+      "glow": true
+    },
+    {
+      "name": "Wulzy",
+      "ship": 27,
+      "iconid": 44,
+      "color1": 29,
+      "color2": 11,
+      "glow": false
+    },
+    {
+      "name": "XShadowWizardX",
+      "iconid": 115,
+      "ship": 48,
+      "color1": 12,
+      "color2": 7,
+      "glow": true
+    },
+    {
+      "name": "FunnyGame",
+      "iconid": 13,
+      "color1": 18,
+      "color2": 9,
+      "glow": false
+    },
+    {
+      "name": "Zobros",
+      "iconid": 36,
+      "color1": 12,
+      "color2": 15,
+      "glow": true
+    },
+    {
+      "name": "ZenthicAlpha",
+      "iconid": 41,
+      "color1": 12,
+      "color2": 3,
+      "glow": true
+    },
+    {
+      "name": "Alkali",
+      "iconid": 4,
+      "color1": 18,
+      "color2": 8,
+      "glow": true
+    },
+    {
+      "name": "Danolex",
+      "iconid": 46,
+      "ship": 9,
+      "color1": 3,
+      "color2": 11,
+      "glow": true
+    },
+    {
+      "name": "Cirtrax",
+      "iconid": 93,
+      "color1": 18,
+      "color2": 41,
+      "glow": false
+    },
+    {
+      "name": "CastriX",
+      "iconid": 120,
+      "color1": 6,
+      "color2": 12,
+      "glow": true
+    }
+  ]
+}

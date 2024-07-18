@@ -15,7 +15,22 @@
 	"resources": {
 		"files": ["assets/*.json"]
 	},
+	"settings": {
+		"notification": {
+			"type": "bool",
+			"default": true,
+			"description": "Displays a notification when destroying an icon with the name of the player",
+			"name": "Name Notification"
+		}
+	},
 	"links": {
 		"community": "https://discord.gg/mmVmCtsG5K"
-	}
+	},
+	"incompatibilities": [
+		{
+			"version": "*",
+			"id": "kittenchilly.pity_title_screen_secret_icons",
+			"importance": "breaking"
+		}
+	]
 }
