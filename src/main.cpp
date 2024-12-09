@@ -1,6 +1,7 @@
 #include "Geode/Enums.hpp"
 #include "Geode/binding/MenuGameLayer.hpp"
 #include "Geode/binding/PlayerObject.hpp"
+#include "Geode/loader/Event.hpp"
 #include "Geode/loader/Mod.hpp"
 #include "Geode/modify/Modify.hpp"
 #include <Geode/ui/Notification.hpp>
@@ -13,8 +14,10 @@
 #include <random>
 #include <stdexcept>
 
-using namespace cocos2d;
+#include "KnownPlayers.h"
 
+using namespace cocos2d;
+using namespace known_players;
 //#define MEMBERBYOFFSET(type, class, offset) *reinterpret_cast<type*>(reinterpret_cast<uintptr_t>(class) + offset)
 //#define MBO MEMBERBYOFFSET
 
@@ -28,64 +31,42 @@ int randomInt(int min, int max) {
 }
 
 
-struct JsonPlayer
+
+IconType getRandomAvailableMode(PlayerData& p)
 {
-    std::string name;
-    int iconid = 0;
-    int color1 = 0;
-    int color2 = 0;
-    std::optional<bool> glow;
-    std::optional<int> glowid; 
-
-    std::optional<int> ship;
-    std::optional<int> ball;
-    std::optional<int> ufo;
-    std::optional<int> wave;
-    std::optional<int> robot;
-    std::optional<int> spider;
-    std::optional<int> swing;
-
-    IconType getRandomAvailableMode()
+    std::vector<IconType> availableModes {IconType::Cube};
+    for(int i = static_cast<int>(IconType::Ship);
+        const auto& opt : {p.shipID, p.ballID, p.ufoID, p.waveID, p.robotID, p.spiderID, p.swingID})
     {
-        std::vector<IconType> availableModes {IconType::Cube};
-
-        for(int i = static_cast<int>(IconType::Ship);
-            const auto& opt : {ship, ball, ufo, wave, robot, spider, swing})
-        {
-            if(opt) availableModes.push_back(static_cast<IconType>(i));
-            i++;
-        }
-        try { return availableModes.at(randomInt(0, availableModes.size() - 1)); }
-        catch(std::out_of_range& e) { return IconType::Cube; }
+        if(opt) availableModes.push_back(static_cast<IconType>(i));
+        i++;
     }
+    try { return availableModes.at(randomInt(0, availableModes.size() - 1)); }
+    catch(std::out_of_range& e) { return IconType::Cube; }
+}
 
-    std::optional<int> iconIdForGameMode(IconType icon)
+std::optional<int> iconIdForGameMode(PlayerData& p, IconType icon)
+{
+    using enum IconType;
+    switch(icon)
     {
-        using enum IconType;
-        switch(icon)
-        {
-            case Cube: return iconid;
-            case Ship: return ship;
-            case Ball: return ball;
-            case Ufo:  return ufo;
-            case Wave: return wave;
-            case Robot: return robot;
-            case Spider: return spider;
-            case Swing: return swing;
-            default: return {};
-        }
+        case Cube: return p.iconID;
+        case Ship: return p.shipID;
+        case Ball: return p.ballID;
+        case Ufo:  return p.ufoID;
+        case Wave: return p.waveID;
+        case Robot: return p.robotID;
+        case Spider: return p.spiderID;
+        case Swing: return p.swingID;
+        default: return {};
     }
+}
 
-    void log()
-    {
-        geode::log::info("Player: {} iconid {} color1 {} color2 {}", name, iconid, color1, color2);
-    }
-};
 
 struct JsonDocument
 {
     std::optional<std::string> schema;
-    std::vector<JsonPlayer> players;
+    std::vector<PlayerData> players;
 };
 
 template <>
@@ -108,7 +89,7 @@ public:
     }
 
     //Check nullptr for error!
-    JsonPlayer* next()
+    PlayerData* next()
     {		
         if(jsonDoc.players.empty()) loadPlayers();
         if(order.empty()) newOrder();
@@ -120,19 +101,19 @@ public:
         }
 
         int index = order.back();
-        currentPlayer = [&]() -> JsonPlayer*
+        m_currentPlayer = [&]() -> PlayerData*
         {
             try { return &jsonDoc.players.at(index); }
             catch(std::out_of_range& e) { return nullptr; }
         }();
 
         order.pop_back();
-        return currentPlayer;
+        return m_currentPlayer;
     }
 
-    JsonPlayer* current()
+    PlayerData* current()
     {
-        return this->currentPlayer;
+        return this->m_currentPlayer;
     }
 
     std::string getJsonStr()
@@ -180,7 +161,7 @@ public:
         std::shuffle(order.begin(), order.end(), std::mt19937{std::random_device{}()});
     }
 
-    const std::vector<JsonPlayer>& getPlayers()
+    const std::vector<PlayerData>& getPlayers()
     {
         return jsonDoc.players;
     }
@@ -188,25 +169,78 @@ private:
     JsonDocument jsonDoc;
     std::vector<int> order;
 
-    JsonPlayer* currentPlayer = nullptr;
+    PlayerData* m_currentPlayer = nullptr;
     bool loadedKnownPlayers = false;
 };
 
+
+
+void modifyPlayer(PlayerObject* po, known_players::PlayerData* data)
+{
+    IconType iconType = getRandomAvailableMode(*data);
+    int vehicleID = iconIdForGameMode(*data, iconType).value_or(-1);
+
+    if(vehicleID == -1)
+    {
+        iconType = IconType::Cube;
+    }
+
+    po->toggleFlyMode(false, false);
+    po->toggleRollMode(false, false);
+    po->toggleBirdMode(false, false);
+    po->toggleBirdMode(false, false);
+    po->toggleDartMode(false, false);
+    po->toggleRobotMode(false, false);
+    po->toggleSpiderMode(false, false);
+    po->toggleSwingMode(false, false);
+
+    po->updatePlayerFrame(data->iconID);
+
+    if(iconType == IconType::Ship)
+    {
+        po->toggleFlyMode(true, true);
+        po->updatePlayerShipFrame(vehicleID);
+    }
+
+#define HELPER(ICONTYPE, TOGGLEFUNC, UPDATEFUNC) \
+    if(iconType == IconType::ICONTYPE) \
+    {\
+        po->TOGGLEFUNC(true, true);\
+        po->UPDATEFUNC(vehicleID);\
+    }
+    HELPER(Ship, toggleFlyMode, updatePlayerShipFrame)
+    HELPER(Ball, toggleRollMode, updatePlayerRollFrame)
+    HELPER(Ufo, toggleBirdMode, updatePlayerBirdFrame)
+    HELPER(Wave, toggleDartMode, updatePlayerDartFrame)
+    HELPER(Robot, toggleRobotMode, updatePlayerRobotFrame)
+    HELPER(Spider, toggleSpiderMode, updatePlayerSpiderFrame)
+    HELPER(Swing, toggleSwingMode, updatePlayerSwingFrame)
+
+    auto gm = GameManager::sharedState();
+    po->setColor(gm->colorForIdx(data->color1));
+    po->setSecondColor(gm->colorForIdx(data->color2));
+
+    if(data->glowID)
+    {
+        po->m_hasGlow = true;
+        po->enableCustomGlowColor(gm->colorForIdx(data->glowID.value()));
+    }
+    else if(data->glow)
+    {
+        po->m_hasGlow = true;
+        po->enableCustomGlowColor(gm->colorForIdx(data->color2));
+    }
+    else
+    {
+        po->m_hasGlow = false;
+        po->m_hasNoGlow = true;
+    }
+    po->updatePlayerGlow();
+    po->updateGlowColor();
+}
+
 struct MGMHook : geode::Modify<MGMHook, MenuGameLayer>
 {
-    //PlayerObject* getplayer()
-    //{
-    //	#if defined(GEODE_IS_WINDOWS)
-    //		return m_playerObject;
-    //	#elif defined(GEODE_IS_ANDROID32)
-    //		return MBO(PlayerObject*, this, 0x180);
-    //	#elif defined(GEODE_IS_ANDROID64)
-    //		return MBO(PlayerObject*, this, 0x1B0);
-    //	#else
-    //		#error Unsupported platform
-    //	#endif
-    //}
-
     void onPlayerClicked(const std::string& name)
     {
         constexpr float time = 0.2f;
@@ -234,8 +268,7 @@ struct MGMHook : geode::Modify<MGMHook, MenuGameLayer>
     {
         MenuGameLayer::resetPlayer();
 
-        auto* po = m_playerObject;
-        if(!po) return;
+        if(!m_playerObject) return;
 
         auto player = PlayerChooser::get()->next();
         if(!player)
@@ -243,69 +276,40 @@ struct MGMHook : geode::Modify<MGMHook, MenuGameLayer>
             geode::log::error("Player is nullptr");
             return;
         }
-
-        IconType iconType = player->getRandomAvailableMode();
-        int vehicleID = player->iconIdForGameMode(iconType).value_or(-1);
-
-        if(vehicleID == -1)
-        {
-            iconType = IconType::Cube;
-        }
-
-        po->toggleFlyMode(false, false);
-        po->toggleRollMode(false, false);
-        po->toggleBirdMode(false, false);
-        po->toggleBirdMode(false, false);
-        po->toggleDartMode(false, false);
-        po->toggleRobotMode(false, false);
-        po->toggleSpiderMode(false, false);
-        po->toggleSwingMode(false, false);
-
-        po->updatePlayerFrame(player->iconid);
-
-        if(iconType == IconType::Ship)
-        {
-            po->toggleFlyMode(true, true);
-            po->updatePlayerShipFrame(vehicleID);
-        }
-
-#define HELPER(ICONTYPE, TOGGLEFUNC, UPDATEFUNC) \
-    if(iconType == IconType::ICONTYPE) \
-    {\
-        po->TOGGLEFUNC(true, true);\
-        po->UPDATEFUNC(vehicleID);\
-    }
-        HELPER(Ship, toggleFlyMode, updatePlayerShipFrame)
-        HELPER(Ball, toggleRollMode, updatePlayerRollFrame)
-        HELPER(Ufo, toggleBirdMode, updatePlayerBirdFrame)
-        HELPER(Wave, toggleDartMode, updatePlayerDartFrame)
-        HELPER(Robot, toggleRobotMode, updatePlayerRobotFrame)
-        HELPER(Spider, toggleSpiderMode, updatePlayerSpiderFrame)
-        HELPER(Swing, toggleSwingMode, updatePlayerSwingFrame)
-
-        auto gm = GameManager::sharedState();
-        po->setColor(gm->colorForIdx(player->color1));
-        po->setSecondColor(gm->colorForIdx(player->color2));
-
-        if(player->glowid)
-        {
-            po->m_hasGlow = true;
-            po->enableCustomGlowColor(gm->colorForIdx(player->glowid.value()));
-        }
-        else if(player->glow)
-        {
-            po->m_hasGlow = true;
-            po->enableCustomGlowColor(gm->colorForIdx(player->color2));
-        }
-        else
-        {
-            po->m_hasGlow = false;
-            po->m_hasNoGlow = true;
-        }
-        po->updatePlayerGlow();
-        po->updateGlowColor();
+        modifyPlayer(m_playerObject, player);
     }
 };
+
+
+//my mod
+$execute
+{
+    using namespace geode;
+    using namespace known_players::events;
+    new EventListener<EventFilter<NextIcon>>(+[](NextIcon* ev){
+        ev->m_callback(PlayerChooser::get()->next());
+        return ListenerResult::Stop;
+    });
+
+
+    new EventListener<EventFilter<CurrentIcon>>(+[](CurrentIcon* ev){
+        ev->m_callback(PlayerChooser::get()->current());
+        return ListenerResult::Stop;
+    });
+
+    new EventListener<EventFilter<NextIconModifyPlayerObject>>(+[](NextIconModifyPlayerObject* ev){
+        modifyPlayer(ev->m_player, PlayerChooser::get()->next());
+        ev->done = true;
+        return ListenerResult::Stop;
+    });
+
+
+    new EventListener<EventFilter<CurrentIconModifyPlayerObject>>(+[](CurrentIconModifyPlayerObject* ev){
+        modifyPlayer(ev->m_player, PlayerChooser::get()->next());
+        ev->done = true;
+        return ListenerResult::Stop;
+    });
+}
 
 
 
@@ -320,7 +324,7 @@ struct MGMHook : geode::Modify<MGMHook, MenuGameLayer>
 
 struct MenuLayerHook : geode::Modify<MenuLayerHook, MenuLayer>
 {
-    void onNewgrounds(CCObject*)
+    void onGarage(CCObject*)
     {
         auto schema = glz::write_json_schema<JsonDocument>();
         geode::utils::clipboard::write([&](){

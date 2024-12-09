@@ -10,7 +10,7 @@ There is also a [schema](https://github.com/iAndyHD3/KnownPlayers/blob/master/as
 
 The mod supports other game modes (that are also randomized) but only actual recognizable game modes are added per player which makes it very rare to see ufos, waves, spiders etc. Ship is the most common game mode other than cube.
 
-There are 44 players added in this version:
+There are 45 players added in this version:
 - AeonAir
 - Alkali
 - CastriX
@@ -33,6 +33,7 @@ There are 44 players added in this version:
 - Lemons
 - MiKhaXx
 - Michigun
+- Moldy
 - Nexus
 - Norcda Childa
 - OmegaFalcon
