@@ -1,9 +1,11 @@
 {
 	"$schema": "https://raw.githubusercontent.com/geode-sdk/vscode/9caea2c9ffbd95e3ca99eb0c94269092ca92d9de/assets/mod-info-validation.json",
-	"geode": "4.0.1",
+	"geode": "4.5.0",
 	"gd": {
 		"win": "2.2074",
-		"android": "2.2074"
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
 	},
 	"version": "v1.2.1",
 	"id": "iandyhd3.known_players",
