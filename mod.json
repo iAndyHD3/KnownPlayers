@@ -1,38 +1,36 @@
 {
-	"$schema": "https://raw.githubusercontent.com/geode-sdk/vscode/9caea2c9ffbd95e3ca99eb0c94269092ca92d9de/assets/mod-info-validation.json",
-	"geode": "4.5.0",
-	"gd": {
-		"win": "2.2074",
-		"android": "2.2074",
-		"mac": "2.2074",
-		"ios": "2.2074"
-	},
-	"version": "v1.2.1",
-	"id": "iandyhd3.known_players",
-	"name": "Known Players",
-	"developer": "iAndyHD3",
-	"tags": [ "enhancement", "offline" ],
-	"repository": "https://github.com/iAndyHD3/KnownPlayers",
-	"description": "only known/famous players pop up in the main menu",
-	"resources": {
-		"files": ["assets/*.json"]
-	},
-	"settings": {
-		"notification": {
-			"type": "bool",
-			"default": true,
-			"description": "Displays a notification when destroying an icon with the name of the player",
-			"name": "Name Notification"
-		}
-	},
-	"links": {
-		"community": "https://discord.gg/mmVmCtsG5K"
-	},
-	"incompatibilities": [
-		{
-			"version": "*",
-			"id": "kittenchilly.pity_title_screen_secret_icons",
-			"importance": "breaking"
-		}
-	]
+    "geode": "4.5.0",
+    "gd": {
+        "win": "2.2074",
+        "android": "2.2074",
+        "mac": "2.2074",
+        "ios": "2.2074"
+    },
+    "version": "v1.3.0",
+    "id": "iandyhd3.known_players",
+    "name": "Known Players",
+    "developer": "iAndyHD3",
+    "tags": ["enhancement", "offline"],
+    "description": "only known players pop up in the main menu",
+    "resources": {
+        "files": ["assets/*.json"]
+    },
+    "settings": {
+        "notification": {
+            "type": "bool",
+            "default": true,
+            "description": "Displays a notification when destroying an icon with the name of the player",
+            "name": "Name Notification"
+        }
+    },
+    "links": {
+        "community": "https://discord.gg/mmVmCtsG5K",
+        "source": "https://github.com/iAndyHD3/KnownPlayers"
+    },
+    "incompatibilities": {
+        "kittenchilly.pity_title_screen_secret_icons": {
+            "importance": "breaking",
+            "version": "*"
+        }
+    }
 }
