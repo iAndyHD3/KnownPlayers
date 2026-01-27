@@ -13,24 +13,20 @@
 #include <glaze/glaze.hpp>
 #include <random>
 #include <stdexcept>
-
+#include "Geode/utils/random.hpp"
 #include "KnownPlayers.h"
 
 using namespace cocos2d;
 using namespace known_players;
+
+
 //#define MEMBERBYOFFSET(type, class, offset) *reinterpret_cast<type*>(reinterpret_cast<uintptr_t>(class) + offset)
 //#define MBO MEMBERBYOFFSET
 
 
 int randomInt(int min, int max) {
-    static std::random_device device;
-    static std::mt19937 generator(device());
-    std::uniform_int_distribution<int> distribution(min, max);
-
-    return distribution(generator);
+    return geode::utils::random::generate(min, max);
 }
-
-
 
 IconType getRandomAvailableMode(PlayerData& p)
 {
@@ -244,7 +240,7 @@ struct MGMHook : geode::Modify<MGMHook, MenuGameLayer>
     void onPlayerClicked(const std::string& name)
     {
         constexpr float time = 0.2f;
-        geode::Notification::create(name, geode::NotificationIcon::Success, time)->show();
+        geode::Notification::create(name.c_str(), geode::NotificationIcon::Success, time)->show();
     }
 
     $override
