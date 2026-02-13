@@ -28,5 +28,4 @@ setup_geode_mod(${PROJECT_NAME})
 
 CPMAddPackage("gh:stephenberry/glaze#d6b4760")
 
-
 target_link_libraries(${PROJECT_NAME} glaze::glaze)

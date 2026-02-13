@@ -1,0 +1,2 @@
+To test if there are any errors in the project you can try to get the list of errors from the LSP if you have a tool for that, if not: the command to test a build is always the following:
+`cmake --build build`

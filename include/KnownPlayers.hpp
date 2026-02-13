@@ -16,7 +16,7 @@ struct PlayerData
     int color1 = 0;
     int color2 = 0;
     std::optional<bool> glow;
-    std::optional<int> glowID; 
+    std::optional<int> glowID;
 
     std::optional<int> shipID;
     std::optional<int> ballID;
@@ -30,32 +30,26 @@ struct PlayerData
 
 namespace events
 {
-struct NextIcon : public geode::Event
-{
-    using Callback = std::function<void(PlayerData*)>;
-    Callback m_callback;
-    NextIcon(const Callback& callback) : m_callback(callback) {}
+struct NextIcon : public geode::Event<NextIcon, bool(PlayerData*)> {
+    using Event::Event;
 };
 
-struct NextIconModifyPlayerObject : public geode::Event
-{
+struct NextIconModifyPlayerObject : public geode::Event<NextIconModifyPlayerObject, bool(PlayerObject*)> {
+    using Event::Event;
     PlayerObject* m_player;
     bool done = false;
     NextIconModifyPlayerObject(PlayerObject* player) : m_player(player) {}
 };
 
-struct CurrentIconModifyPlayerObject : public geode::Event
-{
+struct CurrentIconModifyPlayerObject : public geode::Event<CurrentIconModifyPlayerObject, bool(PlayerObject*)> {
+    using Event::Event;
     PlayerObject* m_player;
     bool done = false;
     CurrentIconModifyPlayerObject(PlayerObject* player) : m_player(player) {}
 };
 
-struct CurrentIcon : public geode::Event
-{
-    using Callback = std::function<void(PlayerData*)>;
-    Callback m_callback;
-    CurrentIcon(const Callback& callback) : m_callback(callback) {}
+struct CurrentIcon : public geode::Event<CurrentIcon, bool(PlayerData*)> {
+    using Event::Event;
 };
 
 
