@@ -1,5 +1,5 @@
 {
-    "geode": "5.0.0-alpha.2",
+    "geode": "5.0.0-beta.4",
     "gd": {
         "win": "2.2081",
         "android": "2.2081",
@@ -11,14 +11,19 @@
             "include/*.hpp"
         ]
     },
-    "version": "v1.3.0",
+    "version": "v2.0.0",
     "id": "iandyhd3.known_players",
     "name": "Known Players",
     "developer": "iAndyHD3",
-    "tags": ["enhancement", "offline"],
+    "tags": [
+        "enhancement",
+        "offline"
+    ],
     "description": "only known players pop up in the main menu",
     "resources": {
-        "files": ["assets/*.json"]
+        "files": [
+            "assets/*.json"
+        ]
     },
     "settings": {
         "notification": {
