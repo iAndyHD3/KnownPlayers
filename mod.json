@@ -11,7 +11,7 @@
             "include/*.hpp"
         ]
     },
-    "version": "v2.0.0",
+    "version": "v2.0.1",
     "id": "iandyhd3.known_players",
     "name": "Known Players",
     "developer": "iAndyHD3",
