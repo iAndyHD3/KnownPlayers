@@ -36,8 +36,5 @@
     "links": {
         "community": "https://discord.gg/mmVmCtsG5K",
         "source": "https://github.com/iAndyHD3/KnownPlayers"
-    },
-    "incompatibilities": {
-        "kittenchilly.pity_title_screen_secret_icons": "*"
     }
 }
