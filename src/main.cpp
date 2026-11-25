@@ -9,12 +9,14 @@
 #include "Geode/modify/Modify.hpp"
 
 
+#include <asp/fs/Path.hpp>
 #include <glaze/core/common.hpp>
 #include <glaze/glaze.hpp>
 #include <random>
 #include <stdexcept>
 
 #include "../include/KnownPlayers.hpp"
+#include "Geode/utils/file.hpp"
 
 using namespace cocos2d;
 using namespace known_players;
@@ -99,32 +101,20 @@ public:
 
     PlayerData* current() { return this->m_currentPlayer; }
 
-    std::string getJsonStr() {
-        std::ifstream file(geode::Mod::get()->getConfigDir(true) / "players.json");
-        if (file)
-            return std::string(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>());
-
-        // this is not expected to change, load just once
-        if (!loadedKnownPlayers) {
-            file.open(geode::Mod::get()->getResourcesDir() / "known_players.json");
-            if (file) {
-                geode::log::info("Loaded known_players.json");
-                loadedKnownPlayers = true;
-                return std::string(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>());
-            }
-        }
-
-        return {};
+    auto getJsonStr() {
+            //custom players file from config dir first
+            auto path = geode::Mod::get()->getConfigDir(true) / "players.json";
+            return geode::utils::file::readString(path.isFile() ? path : geode::Mod::get()->getResourcesDir() / "known_players.json");
     }
 
     void loadPlayers() {
-        std::string jsonStr = getJsonStr();
-        if (jsonStr.empty()) {
+        auto jsonStr = getJsonStr();
+        if (!jsonStr) {
             return geode::log::error("Empty string! Could not load new players");
         }
 
         jsonDoc.players.clear();
-        auto error = glz::read_json(jsonDoc, jsonStr);
+        auto error = glz::read_json(jsonDoc, jsonStr.unwrap());
         if (error != 0) {
             geode::log::error("Error reading json! {}", glz::format_error(error));
             return;
@@ -145,7 +135,6 @@ private:
     std::vector<int> order;
 
     PlayerData* m_currentPlayer = nullptr;
-    bool loadedKnownPlayers = false;
 };
 
 void modifyPlayer(PlayerObject* po, known_players::PlayerData* data) {
